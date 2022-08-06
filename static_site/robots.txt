@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /Assets/
+Disallow: /index.js
+Disallow: /index.css
