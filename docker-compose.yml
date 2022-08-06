@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+      target: base
+    restart: always
+    volumes:
+      - ./backend/src:/home/node/app/src
+      - ./backend/assets:/home/node/app/assets
+      - ./backend/nodemon.json:/home/node/app/nodemon.json
+    command: npm run dev
+  nginx:
+      image: nginx:latest
+      ports:
+          - "1313:8080"
+      volumes:
+          - ./backend/nginx/lb.dev.conf:/etc/nginx/conf.d/lb.conf
+      depends_on:
+          - api
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    command: node ./index.js
+    ports:
+      - "3000:3000"

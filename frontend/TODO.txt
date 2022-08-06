@@ -1,0 +1,4 @@
+- Create a seperate route for the store, the store section will route to there
+- Connect contact section to some method for sending messages to our email
+- Switch out images in store section for images of our merch
+- Rethink background for different sections
