@@ -8,4 +8,12 @@ services:
   nginx:
     volumes:
             - ./backend/nginx/lb.dev.conf:/etc/nginx/conf.d/lb.conf
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: always
+    command: node ./index.js
+    ports:
+      - "3000:3000"
 

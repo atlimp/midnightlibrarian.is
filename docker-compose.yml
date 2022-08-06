@@ -20,11 +20,3 @@ services:
           - ./backend/nginx/lb.dev.conf:/etc/nginx/conf.d/lb.conf
       depends_on:
           - api
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    restart: always
-    command: node ./index.js
-    ports:
-      - "3000:3000"
