@@ -29,6 +29,21 @@ class DatabaseService implements IBaseService {
         return promise;
     }
 
+    run(query: string, params: object = {}): Promise<any> {
+        const promise: Promise<any> = new Promise((resolve, reject) => {
+            this.db?.run(query, params, (err) => {
+                
+                if (err) {
+                    reject(err);
+                }
+
+                resolve('');
+            });
+        });
+
+        return promise;
+    }
+
     close() {
         this.db?.close();
     }

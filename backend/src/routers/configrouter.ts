@@ -16,6 +16,7 @@ class ConfigRouter implements IBaseRouter {
 
     initRoutes() {
         this.router.get('/', catchAllErrors(this.getConfig));
+        this.router.put('/', catchAllErrors(this.updateConfig));
     }
 
     initMiddleware() {
@@ -25,6 +26,16 @@ class ConfigRouter implements IBaseRouter {
         const controller = new ConfigController();
 
         const result = await controller.getConfig();
+
+        return res.status(200).json(result);
+    }
+
+    async updateConfig(req: Request, res: Response) {
+        const controller = new ConfigController();
+
+        const config = req.body;
+
+        const result = await controller.updateConfig(config);
 
         return res.status(200).json(result);
     }

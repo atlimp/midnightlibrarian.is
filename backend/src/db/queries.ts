@@ -7,3 +7,5 @@ export const GET_ALL_ACTIVE_RELEASES = 'SELECT t1.id, t1.name, t1.description, t
 export const GET_RELEASE = 'SELECT t1.id, t1.name, t2.type, t1.description, t1.image, t1.active, t1.release_date FROM RELEASE t1 JOIN RELEASETYPE t2 ON t1.type = t2.id WHERE t1.id = $id';
 export const GET_RELEASE_LINKS = 'SELECT site, link FROM RELEASELINK WHERE release = $release';
 export const GET_RANDOM_QUOTE = 'SELECT quote FROM QUOTE ORDER BY RANDOM() LIMIT 1';
+
+export const UPDATE_CONFIG = 'UPDATE CONFIG set doi_date = $doi_date, doi_message = $doi_message, doi_countdown = $doi_countdown, motd = $motd, show_additional_content = $show_additional_content WHERE config_id = $config_id';
