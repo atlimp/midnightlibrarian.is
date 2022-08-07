@@ -6,7 +6,7 @@ up-prod:
 
 
 down:
-	docker-compose down
+	docker-compose down --remove-orphans
 
 build-dev: 
 	docker-compose build
