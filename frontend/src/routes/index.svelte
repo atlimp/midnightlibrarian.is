@@ -16,6 +16,7 @@
     import Releases from '../components/Sections/Releases.svelte';
     import Contact from '../components/Sections/Contact.svelte';
     import Info from '../components/Sections/Info.svelte';
+    import Socials from '../components/Sections/Socials.svelte';
     
     export let links;
     export let config;
@@ -28,7 +29,7 @@
     })
 </script>
 <div id="tv" class="fixed transition-all duration-500 {loaded ? 'bg-transparent opacity-80' : 'bg-black'} inset-0 h-screen w-screen z-50 pointer-events-none before:fixed before:h-screen before:w-screen before:inset-0 before:pointer-events-none before:bg-tv before:animate-flicker before:z-10 after:fixed after:inset-0 after:animate-grain after:bg-grain after:opacity-40 after:h-full-x2 after:w-full-x2 after:-left-2/4 after:-top-2/4 after:pointer-events-none"></div>
-<Player links={links} config={config} quote={quote}/>
+<Player config={config} quote={quote}/>
 <hr class="w-5/6 opacity-20 mx-auto" />
 {#if config.AdditionalInfo || true}
     <AdditionalInfo />
@@ -38,4 +39,5 @@
 <hr class="w-5/6 opacity-20 mx-auto" />
 <Releases releases={releases} />
 <hr class="w-5/6 opacity-20 mx-auto" />
+<Socials links={links} />
 <Contact />
