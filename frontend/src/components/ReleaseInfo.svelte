@@ -8,7 +8,7 @@
     <div class="md:col-span-2 md:row-span-2 px-4 text-left">
         <h2 class="text-2xl xl:text-4xl font-bold uppercase text-center md:text-left">{release.name} - {release.type}</h2>
         <div class="text-center md:text-left xl:text-lg">Released: {release.releaseDate.toLocaleDateString()}</div>
-        <p class="uppercase text-md xl:text-xl mt-1 xl:mt-2 text-justify">{release.description}</p>
+        <p class="uppercase text-lg xl:text-xl mt-1 xl:mt-2 text-justify">{release.description}</p>
     </div>
     <div class="flex justify-center items-center gap-8 h-full col-span-2">
         {#each release.links as link }
