@@ -4,7 +4,7 @@
 
     export let links: Link[];
 </script>
-<div class="grid place-items-center p-8 blur-2xs">
+<div class="grid place-items-center p-8 blur-2xs" id="socials">
     <h1 class="text-center py-32 text-lg lg:text-3xl pb-12 pt-24">
         Find us on social media
     </h1>
