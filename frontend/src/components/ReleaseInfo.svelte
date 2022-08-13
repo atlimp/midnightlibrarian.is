@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { Release } from "$lib/interfaces";
+    import Button from "./Button.svelte";
 
     export let release: Release;
 </script>
@@ -12,7 +13,7 @@
     </div>
     <div class="flex justify-center items-center gap-8 h-full col-span-2">
         {#each release.links as link }
-            <a class="block py-2 px-4 xl:py-4 xl:px-8 rounded-full border-solid border-2 w-fit transition-colors text-lg md:text-xl xl:text-2xl capitalize hover:bg-orange" href={link.link}>{link.site}</a>
+            <Button text={link.site} link={link.link} rounded size="md" styles="capitalize"/>
         {/each}
     </div>
 </div>
