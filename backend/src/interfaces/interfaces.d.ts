@@ -58,3 +58,11 @@ export interface Config {
 export interface Quote {
     quote: string;
 }
+
+export interface Member {
+    id: number;
+    name: string;
+    role: string;
+    description: string;
+    image: string;
+}
