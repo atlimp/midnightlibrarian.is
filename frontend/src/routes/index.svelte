@@ -1,12 +1,13 @@
 <script context="module">
-    import { fetchLinks, fetchConfig, fetchQuote, fetchReleases } from '$stores/infoStore';
+    import { fetchLinks, fetchConfig, fetchQuote, fetchReleases, fetchMembers } from '$stores/infoStore';
     // This preloads the data before the page is rendered
     export async function load({ params, fetch }) {
         const links = await fetchLinks(fetch);
         const config = await fetchConfig(fetch);
         const quote = await fetchQuote(fetch);
         const releases = await fetchReleases(fetch);
-        return { props: { links, config, quote, releases } };
+        const members = await fetchMembers(fetch);
+        return { props: { links, config, quote, releases, members } };
     }
 </script>
 <script lang="ts">
@@ -22,6 +23,7 @@
     export let config;
     export let quote;
     export let releases;
+    export let members;
     export let loaded = false;
 
     onMount(() => {
@@ -35,7 +37,7 @@
     <AdditionalInfo />
     <hr class="w-5/6 opacity-20 mx-auto" />
 {/if}
-<Info />
+<Info members={members} />
 <hr class="w-5/6 opacity-20 mx-auto" />
 <Releases releases={releases} />
 <hr class="w-5/6 opacity-20 mx-auto" />
