@@ -36,7 +36,7 @@ import { SCREEN_SIZES } from '$lib/constants';
 <Section flex styles="place-items-center flex-col gap-16 my-16 m-auto">
     <div class="flex flex-col gap-16">
         <img class="w-5/6 xl:w-1/2 rounded-xl m-auto" src="GroupPortrait.jpg" alt="Concert in Hljómahöll, Keflavík. Get your tickets now!"/>
-        <p class="text-lg md:text-xl xl:text-2xl text-center w-5/6 xl:w-4/6 m-auto"><strong>Midnight Librarian</strong> is an Icelandic band comprised of 8 musicians with a musical style that is somewhat difficult to place into a specific genre. Mainly we play what we think sound cool, and we hope you do too.</p>
+        <p class="text-lg md:text-xl xl:text-2xl text-center w-5/6 xl:w-4/6 m-auto"><strong>Midnight Librarian</strong> is an Icelandic band comprised of 8 musicians with a musical style that is somewhat difficult to place into a specific genre. Mainly we play what we think sounds cool, and we hope you do too.</p>
     </div>
     <div class="flex flex-col w-full items-center gap-16">
         <h2 class="text-2xl lg:text-4xl">Members</h2>
