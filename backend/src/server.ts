@@ -3,6 +3,7 @@ import ConfigRouter from './routers/configrouter';
 import LinksRouter from './routers/linksrouter';
 import QuoteRouter from './routers/quoterouter';
 import ReleasesRouter from './routers/releasesrouter';
+import MemberRouter from './routers/memberrouter';
 import { getConfigOrDefault } from './util/util';
 
 const host: string = getConfigOrDefault('HOST', 'localhost');
@@ -17,6 +18,7 @@ const app = new App({
         new LinksRouter(),
         new ReleasesRouter(),
         new QuoteRouter(),
+        new MemberRouter(),
     ],
 });
 

@@ -26,3 +26,14 @@ export interface Release {
     description: string;
     releaseDate: Date;
 }
+
+export interface Member {
+    name: string;
+    role: string;
+    description: string;
+    image: string;
+}
+
+export interface CarouselOptions {
+    particlesToShow: number;
+}
