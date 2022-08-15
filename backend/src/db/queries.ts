@@ -7,3 +7,5 @@ export const GET_ALL_ACTIVE_RELEASES = 'SELECT t1.id, t1.name, t1.description, t
 export const GET_RELEASE = 'SELECT t1.id, t1.name, t2.type, t1.description, t1.image, t1.active, t1.release_date FROM RELEASE t1 JOIN RELEASETYPE t2 ON t1.type = t2.id WHERE t1.id = $id';
 export const GET_RELEASE_LINKS = 'SELECT site, link FROM RELEASELINK WHERE release = $release';
 export const GET_RANDOM_QUOTE = 'SELECT quote FROM QUOTE ORDER BY RANDOM() LIMIT 1';
+export const GET_MEMBERS = 'SELECT id, name, role, description, image FROM MEMBER';
+export const GET_MEMBER = 'SELECT id, name, role, description, image FROM MEMBER WHERE id = $id';
