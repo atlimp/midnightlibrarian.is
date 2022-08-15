@@ -47,40 +47,12 @@ export const fetchReleases = async (fetch): Promise<Release[]> => {
 }
 
 export const fetchMembers = async (fetch): Promise<Member[]> => {
-    /*const requestUrl = `${BASE_API_URL}/members`;
+    const requestUrl = `${BASE_API_URL}/members`;
     const data = await (await fetch(requestUrl)).json();
     let result: Member[] = [];
     for (const member of data) {
         result.push(member as Member);
     }
     shuffleArray(result);
-    return result;*/
-    let members = [
-        {
-            name: "Jón Böðvarsson",
-            image: "JB.jpg",
-            role: "Saxophone",
-            description: "Jón aka 'Johnny Thunder' is the bands saxophone player."
-        },
-        {
-            name: "Arnar Ingólfsson",
-            image: "AI.jpg",
-            role: "Rythm guitar and talkbox",
-            description: "Arnar plays rythm guitar and talkbox. He also produces most of the bands releases."
-        },
-        {
-            name: "Atli Marcher Pálsson",
-            image: "AMP.jpg",
-            role: "Bass",
-            description: "Atli is the bands bassman and resident dad joke master."
-        },
-        {
-            name: "Diljá Pétursdóttir",
-            image: "DP.jpg",
-            role: "Lead Singer",
-            description: "Diljá sings the high notes and all does all the vocal runs."
-        }
-    ] as Member[];
-    shuffleArray(members);
-    return members;
+    return result;
 }
