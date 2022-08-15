@@ -21,4 +21,7 @@
         width: 2em !important;
         height: 2em !important;
     }
+    :global(.sc-carousel-dots__container) {
+        padding: 1em 1em 0 1em !important;
+    }
 </style>

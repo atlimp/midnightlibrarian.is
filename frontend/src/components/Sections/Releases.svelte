@@ -6,7 +6,7 @@
 
     export let releases: Release[]
 </script>
-<Section flex styles="flex-col gap-24 items-center text-center pt-24 pb-32 gap-32 blur-2xs m-auto">
+<Section flex styles="flex-col gap-24 items-center text-center my-16 gap-32 blur-2xs m-auto lg:w-11/12">
     <h1 class="text-3xl lg:text-6xl">Releases</h1>
     <Carousel>
         {#each releases as release}
