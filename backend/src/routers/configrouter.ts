@@ -2,6 +2,8 @@ import express, { Request, Response, Router } from 'express';
 import ConfigController from '../controllers/configcontroller';
 import { IBaseRouter } from '../interfaces/interfaces';
 import { catchAllErrors } from '../util/util';
+import Config from '../model/config';
+import { validate } from '../middleware/validationmiddleware';
 
 class ConfigRouter implements IBaseRouter {
 
@@ -16,7 +18,7 @@ class ConfigRouter implements IBaseRouter {
 
     initRoutes() {
         this.router.get('/', catchAllErrors(this.getConfig));
-        this.router.put('/', catchAllErrors(this.updateConfig));
+        this.router.put('/', Config.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateConfig));
     }
 
     initMiddleware() {

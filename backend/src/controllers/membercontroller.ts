@@ -1,6 +1,7 @@
-import { GET_MEMBERS, GET_MEMBER } from '../db/queries';
+import { GET_MEMBERS, GET_MEMBER, INSERT_MEMBER } from '../db/queries';
 import NotFoundException from '../exceptions/notfoundexception';
-import { IBaseController, Member } from '../interfaces/interfaces';
+import { IBaseController } from '../interfaces/interfaces';
+import Member from '../model/member';
 import DatabaseService from '../services/databaseservice';
 
 class MemberController implements IBaseController {
@@ -37,6 +38,36 @@ class MemberController implements IBaseController {
             description: result.description,
             image: result.image,
         } as Member;
+    }
+
+    async createMember(member: Member): Promise<void> {
+        const db: DatabaseService = new DatabaseService();
+
+        const params = {
+            $name: member.name,
+            $role: member.role,
+            $description: member.description,
+            $image: member.image,
+        };
+
+        await db.run(INSERT_MEMBER, params);
+
+        db.close();
+    }
+
+    async updateMember(member: Member): Promise<void> {
+        const db: DatabaseService = new DatabaseService();
+
+        const params = {
+            $name: member.name,
+            $role: member.role,
+            $description: member.description,
+            $image: member.image,
+        };
+
+        await db.run(INSERT_MEMBER, params);
+
+        db.close();
     }
 }
 

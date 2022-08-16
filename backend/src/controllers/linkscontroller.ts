@@ -1,6 +1,7 @@
-import { GET_ALL_ACTIVE_LINKS, GET_ALL_LINKS, GET_LINK } from '../db/queries';
+import { GET_ALL_ACTIVE_LINKS, GET_ALL_LINKS, GET_LINK, INSERT_LINK, UPDATE_LINK } from '../db/queries';
 import NotFoundException from '../exceptions/notfoundexception';
-import { IBaseController, Link } from '../interfaces/interfaces';
+import { IBaseController } from '../interfaces/interfaces';
+import Link from '../model/link';
 import DatabaseService from '../services/databaseservice';
 
 class LinksController implements IBaseController {
@@ -51,6 +52,34 @@ class LinksController implements IBaseController {
             svg: result.svg,
             active: result.active === 1,
         } as Link;
+    }
+
+    async createLink(link: Link): Promise<void> {
+        const db: DatabaseService = new DatabaseService();
+
+        const params = {
+            $site: link.site,
+            $link: link.link,
+            $svg: link.svg,
+            $active: link.active,
+        };
+        
+        await db.run(INSERT_LINK, params);
+
+        db.close();
+    }
+
+    async updateLink(link: Link): Promise<void> {
+        const db: DatabaseService = new DatabaseService();
+
+        const params = {
+            $site: link.site,
+            $link: link.link,
+            $svg: link.svg,
+            $active: link.active,
+        };
+        
+        await db.run(UPDATE_LINK, params);
     }
 }
 

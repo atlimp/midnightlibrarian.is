@@ -1,5 +1,6 @@
 import { GET_CONFIG, UPDATE_CONFIG } from '../db/queries';
-import { IBaseController, Config } from '../interfaces/interfaces';
+import { IBaseController } from '../interfaces/interfaces';
+import Config from '../model/config';
 import DatabaseService from '../services/databaseservice';
 
 class ConfigController implements IBaseController {
