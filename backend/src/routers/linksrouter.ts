@@ -22,6 +22,7 @@ class LinksRouter implements IBaseRouter {
         this.router.get('/:site', catchAllErrors(this.getLink));
         this.router.post('/', Link.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createLink));
         this.router.put('/', Link.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateLink));
+        this.router.delete('/:site', Link.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteLink));
     }
 
     initMiddleware() {
@@ -82,6 +83,16 @@ class LinksRouter implements IBaseRouter {
         const result = await controller.createLink({ id, site, link, svg, active } as Link);
 
         return res.status(200).json(result);
+    }
+
+    async deleteLink(req: Request, res: Response) {
+        const { site } = req.params;
+
+        const controller = new LinksController();
+
+        await controller.deleteLink(site);
+
+        return res.status(204).send();
     }
 }
 
