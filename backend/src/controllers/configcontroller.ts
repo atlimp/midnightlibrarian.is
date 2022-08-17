@@ -26,30 +26,40 @@ class ConfigController implements IBaseController {
     async updateConfig(config: Config): Promise<Config> {
         const db: DatabaseService = new DatabaseService();
 
-        const params = {
-            $doi_date: config.doi.date,
-            $doi_message: config.doi.message,
-            $doi_countdown: config.doi.countdown,
-            $motd: config.motd,
-            $show_additional_content: config.showAdditionalContent,
-            $config_id: 1,
-        };
+        try {
+            await db.beginTransaction();
 
-        await db.run(UPDATE_CONFIG, params);
+            const params = {
+                $doi_date: config.doi.date,
+                $doi_message: config.doi.message,
+                $doi_countdown: config.doi.countdown,
+                $motd: config.motd,
+                $show_additional_content: config.showAdditionalContent,
+                $config_id: 1,
+            };
+    
+            await db.run(UPDATE_CONFIG, params);
+    
+            const [ result ] = await db.get(GET_CONFIG, { $configId: 1 });
+            
+            await db.commitTransaction()
 
-        const [ result ] = await db.get(GET_CONFIG, { $configId: 1 });
+            return {
+                doi: {
+                    date: result.doi_date,
+                    message: result.doi_message,
+                    countdown: result.doi_countdown === 1,
+                },
+                motd: result.motd,
+                showAdditionalContent: result.show_additional_content === 1,
+            } as Config;
+        } catch (e) {
+            await db.rollbackTransaction();
+            throw e;
+        } finally {
+            db.close();
+        }
 
-        db.close();
-
-        return {
-            doi: {
-                date: result.doi_date,
-                message: result.doi_message,
-                countdown: result.doi_countdown === 1,
-            },
-            motd: result.motd,
-            showAdditionalContent: result.show_additional_content === 1,
-        } as Config;
     }
 }
 
