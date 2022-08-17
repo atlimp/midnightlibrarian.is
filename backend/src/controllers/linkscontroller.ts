@@ -70,7 +70,7 @@ class LinksController implements IBaseController {
 
         try {
 
-            db.beginTransaction();
+            await db.beginTransaction();
 
             const params = {
                 $site: link.site,
@@ -83,7 +83,7 @@ class LinksController implements IBaseController {
 
             const [ result ] = await db.get(GET_INSERTED_LINK);
             
-            db.commitTransaction();
+            await db.commitTransaction();
 
             return {
                 site: result.site,
@@ -92,7 +92,7 @@ class LinksController implements IBaseController {
                 active: result.active === 1,
             } as Link;
         } catch (e) {
-            db.rollbackTransaction()
+            await db.rollbackTransaction()
             throw e;
         } finally {
             db.close();
@@ -104,7 +104,7 @@ class LinksController implements IBaseController {
 
         try {
 
-            db.beginTransaction();
+            await db.beginTransaction();
 
             const params = {
                 $site: link.site,
@@ -117,7 +117,7 @@ class LinksController implements IBaseController {
 
             const [ result ] = await db.get(GET_LINK, { $site: link.site });
             
-            db.commitTransaction();
+            await db.commitTransaction();
 
             return {
                 site: result.site,
@@ -126,7 +126,7 @@ class LinksController implements IBaseController {
                 active: result.active === 1,
             } as Link;
         } catch (e) {
-            db.rollbackTransaction()
+            await db.rollbackTransaction()
             throw e;
         } finally {
             db.close();

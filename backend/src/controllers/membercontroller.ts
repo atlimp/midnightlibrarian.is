@@ -55,7 +55,7 @@ class MemberController implements IBaseController {
         const db: DatabaseService = new DatabaseService();
 
         try {
-            db.beginTransaction();
+            await db.beginTransaction();
 
             const params = {
                 $name: member.name,
@@ -68,7 +68,7 @@ class MemberController implements IBaseController {
 
             const [ result ] = await db.get(GET_INSERTED_MEMBER);
         
-            db.commitTransaction();
+            await db.commitTransaction();
 
             return {
                 id: result.id,
@@ -78,7 +78,7 @@ class MemberController implements IBaseController {
                 image: result.image,
             } as Member;
         } catch (e) {
-            db.rollbackTransaction();
+            await db.rollbackTransaction();
             throw e;
         } finally {
             db.close();
@@ -89,7 +89,7 @@ class MemberController implements IBaseController {
         const db: DatabaseService = new DatabaseService();
 
         try {
-            db.beginTransaction();
+            await db.beginTransaction();
 
             const params = {
                 $id: member.id,
@@ -103,7 +103,7 @@ class MemberController implements IBaseController {
 
             const [ result ] = await db.get(GET_MEMBER, { $id: member.id });
         
-            db.commitTransaction();
+            await db.commitTransaction();
             
             return {
                 id: result.id,
@@ -113,7 +113,7 @@ class MemberController implements IBaseController {
                 image: result.image,
             } as Member;
         } catch (e) {
-            db.rollbackTransaction();
+            await db.rollbackTransaction();
             throw e;
         } finally {
             db.close();
@@ -125,13 +125,13 @@ class MemberController implements IBaseController {
 
         try {
 
-            db.beginTransaction();
+            await db.beginTransaction();
 
             await db.run(DELETE_MEMBER, { $id: id });
             
-            db.commitTransaction();
+            await db.commitTransaction();
         } catch (e) {
-            db.rollbackTransaction()
+            await db.rollbackTransaction()
             throw e;
         } finally {
             db.close();
