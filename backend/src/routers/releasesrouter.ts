@@ -1,6 +1,8 @@
 import express, { Request, Response, Router } from 'express';
 import ReleasesController from '../controllers/releasescontroller';
 import { IBaseRouter } from '../interfaces/interfaces';
+import { validate } from '../middleware/validationmiddleware';
+import Release from '../model/release';
 import { catchAllErrors } from '../util/util';
 
 class ReleasesRouter implements IBaseRouter {
@@ -18,6 +20,9 @@ class ReleasesRouter implements IBaseRouter {
         this.router.get('/', catchAllErrors(this.getAllReleases));
         this.router.get('/active', catchAllErrors(this.getActiveReleases));
         this.router.get('/:id', catchAllErrors(this.getRelease));
+        this.router.post('/', Release.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createRelease));
+        this.router.put('/', Release.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateRelease));
+        this.router.delete('/:id', Release.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteRelease));
     }
 
     initMiddleware() {
@@ -47,6 +52,36 @@ class ReleasesRouter implements IBaseRouter {
         const result = await controller.getRelease(Number(id));
 
         return res.status(200).json(result);
+    }
+
+    async createRelease(req: Request, res: Response) {
+        const release = req.body;
+
+        const controller = new ReleasesController();
+
+        const result = await controller.createRelease(release);
+
+        return res.status(200).json(result);
+    }
+
+    async updateRelease(req: Request, res: Response) {
+        const release = req.body;
+
+        const controller = new ReleasesController();
+
+        const result = await controller.updateRelease(release);
+
+        return res.status(200).json(result);
+    }
+
+    async deleteRelease(req: Request, res: Response) {
+        const { id } = req.params;
+
+        const controller = new ReleasesController();
+
+        const result = await controller.deleteRelease(Number(id));
+
+        return res.status(204).send();
     }
 }
 

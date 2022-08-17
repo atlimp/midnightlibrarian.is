@@ -12,11 +12,17 @@ export const UPDATE_LINK = 'UPDATE LINK set link = $link, svg = $svg, active = $
 export const DELETE_LINK = 'DELETE FROM LINK WHERE site = $site';
 
 // RELEASES
-export const GET_ALL_RELEASES = 'SELECT t1.id, t1.name, t1.description, t2.type, t1.image, t1.active, t1.release_date FROM RELEASE t1 JOIN RELEASETYPE t2 ON t1.type = t2.id';
-export const GET_ALL_ACTIVE_RELEASES = 'SELECT t1.id, t1.name, t1.description, t2.type, t1.image, t1.active, t1.release_date FROM RELEASE t1 JOIN RELEASETYPE t2 ON t1.type = t2.id WHERE t1.active = 1';
-export const GET_RELEASE = 'SELECT t1.id, t1.name, t2.type, t1.description, t1.image, t1.active, t1.release_date FROM RELEASE t1 JOIN RELEASETYPE t2 ON t1.type = t2.id WHERE t1.id = $id';
+export const GET_ALL_RELEASES = 'SELECT id, name, description, type, image, active, release_date FROM RELEASE';
+export const GET_ALL_ACTIVE_RELEASES = 'SELECT id, name, description, type, image, active, release_date FROM RELEASE WHERE active = 1';
+export const GET_RELEASE = 'SELECT id, name, description, type, image, active, release_date FROM RELEASE WHERE id = $id';
 export const GET_RELEASE_LINKS = 'SELECT site, link FROM RELEASELINK WHERE release = $release';
-export const GET_RELEASE_TYPES = 'SELECT id, type FROM RELEASETYPE WHERE release = $release';
+export const INSERT_RELEASE = 'INSERT INTO RELEASE(name, type, description, image, active, release_date) VALUES($name, $type, $description, $image, $active, $release_date)';
+export const GET_INSERTED_RELEASE = 'SELECT id, name, description, type, image, active, release_date FROM RELEASE WHERE rowid = last_insert_rowid()';
+export const INSERT_RELEASE_LINK = 'INSERT INTO RELEASELINK(release, site, link) VALUES($release, $site, $link)';
+export const UPDATE_RELEASE = 'UPDATE RELEASE SET name = $name, description = $description, type = $type, image = $image, active = $active, release_date = $release_date where id = $id';
+export const DELETE_RELEASE_LINKS = 'DELETE FROM RELEASELINK WHERE release = $release';
+export const DELETE_RELEASE = 'DELETE FROM RELEASE WHERE id = $id';
+
 
 // QUOTES
 export const GET_RANDOM_QUOTE = 'SELECT quote FROM QUOTE ORDER BY RANDOM() LIMIT 1';
