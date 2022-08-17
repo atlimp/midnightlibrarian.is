@@ -24,8 +24,10 @@ export const GET_RANDOM_QUOTE = 'SELECT quote FROM QUOTE ORDER BY RANDOM() LIMIT
 // MEMBERS
 export const GET_MEMBERS = 'SELECT id, name, role, description, image FROM MEMBER';
 export const GET_MEMBER = 'SELECT id, name, role, description, image FROM MEMBER WHERE id = $id';
+export const GET_INSERTED_MEMBER = 'SELECT id, name, role, description, image FROM MEMBER WHERE rowid = last_insert_rowid()';
 export const INSERT_MEMBER = 'INSERT INTO MEMBER(name, role, description, image) VALUES($name, $role, $description, $image)';
 export const UPDATE_MEMBER = 'UPDATE MEMBER SET name = $name, role = $role, description = $description, image= $image WHERE id = $id';
+export const DELETE_MEMBER = 'DELETE FROM MEMBER WHERE id = $id';
 
 // OTHER
 export const BEGIN_TRANSACTION = 'BEGIN TRANSACTION';

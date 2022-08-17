@@ -21,6 +21,7 @@ class MemberRouter implements IBaseRouter {
         this.router.get('/:id', catchAllErrors(this.getMember));
         this.router.post('/', Member.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createMember));
         this.router.put('/', Member.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateMember));
+        this.router.delete('/:id', Member.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteMember));
     }
 
     initMiddleware() {
@@ -73,6 +74,16 @@ class MemberRouter implements IBaseRouter {
         const result = await controller.updateMember({ id, name, role, description, image } as Member);
 
         return res.status(200).json(result);
+    }
+
+    async deleteMember(req: Request, res: Response) {
+        const { id } = req.params;
+
+        const controller = new MemberController();
+
+        await controller.deleteMember(Number(id));
+
+        return res.status(204).send();
     }
 }
 

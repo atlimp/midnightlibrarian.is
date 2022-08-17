@@ -1,4 +1,4 @@
-import { GET_MEMBERS, GET_MEMBER, INSERT_MEMBER } from '../db/queries';
+import { GET_MEMBERS, GET_MEMBER, INSERT_MEMBER, GET_INSERTED_MEMBER, UPDATE_MEMBER, DELETE_MEMBER } from '../db/queries';
 import NotFoundException from '../exceptions/notfoundexception';
 import { IBaseController } from '../interfaces/interfaces';
 import Member from '../model/member';
@@ -40,34 +40,102 @@ class MemberController implements IBaseController {
         } as Member;
     }
 
-    async createMember(member: Member): Promise<void> {
+    async memberExists(id: number): Promise<boolean> {
         const db: DatabaseService = new DatabaseService();
 
-        const params = {
-            $name: member.name,
-            $role: member.role,
-            $description: member.description,
-            $image: member.image,
-        };
-
-        await db.run(INSERT_MEMBER, params);
-
+        const [ result ] = await db.get(GET_MEMBER, { $id: id });
         db.close();
+
+        if (result) return true;
+
+        return false;
     }
 
-    async updateMember(member: Member): Promise<void> {
+    async createMember(member: Member): Promise<Member> {
         const db: DatabaseService = new DatabaseService();
 
-        const params = {
-            $name: member.name,
-            $role: member.role,
-            $description: member.description,
-            $image: member.image,
-        };
+        try {
+            db.beginTransaction();
 
-        await db.run(INSERT_MEMBER, params);
+            const params = {
+                $name: member.name,
+                $role: member.role,
+                $description: member.description,
+                $image: member.image,
+            };
+    
+            await db.run(INSERT_MEMBER, params);
 
-        db.close();
+            const [ result ] = await db.get(GET_INSERTED_MEMBER);
+        
+            db.commitTransaction();
+
+            return {
+                id: result.id,
+                name: result.name,
+                role: result.role,
+                description: result.description,
+                image: result.image,
+            } as Member;
+        } catch (e) {
+            db.rollbackTransaction();
+            throw e;
+        } finally {
+            db.close();
+        }
+    }
+
+    async updateMember(member: Member): Promise<Member> {
+        const db: DatabaseService = new DatabaseService();
+
+        try {
+            db.beginTransaction();
+
+            const params = {
+                $id: member.id,
+                $name: member.name,
+                $role: member.role,
+                $description: member.description,
+                $image: member.image,
+            };
+    
+            await db.run(UPDATE_MEMBER, params);
+
+            const [ result ] = await db.get(GET_MEMBER, { $id: member.id });
+        
+            db.commitTransaction();
+            
+            return {
+                id: result.id,
+                name: result.name,
+                role: result.role,
+                description: result.description,
+                image: result.image,
+            } as Member;
+        } catch (e) {
+            db.rollbackTransaction();
+            throw e;
+        } finally {
+            db.close();
+        }
+    }
+
+    async deleteMember(id: number): Promise<void> {
+        const db: DatabaseService = new DatabaseService();
+
+        try {
+
+            db.beginTransaction();
+
+            await db.run(DELETE_MEMBER, { $id: id });
+            
+            db.commitTransaction();
+        } catch (e) {
+            db.rollbackTransaction()
+            throw e;
+        } finally {
+            db.close();
+        }
     }
 }
 
