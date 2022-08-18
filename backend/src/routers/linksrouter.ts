@@ -4,6 +4,7 @@ import { IBaseRouter } from '../interfaces/interfaces';
 import { catchAllErrors } from '../util/util';
 import Link from '../model/link';
 import { validate } from '../middleware/validationmiddleware';
+import { authenticate } from '../middleware/authenticationmiddleware';
 
 class LinksRouter implements IBaseRouter {
 
@@ -20,9 +21,9 @@ class LinksRouter implements IBaseRouter {
         this.router.get('/', catchAllErrors(this.getAllLinks));
         this.router.get('/active', catchAllErrors(this.getActiveLinks));
         this.router.get('/:site', catchAllErrors(this.getLink));
-        this.router.post('/', Link.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createLink));
-        this.router.put('/', Link.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateLink));
-        this.router.delete('/:site', Link.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteLink));
+        this.router.post('/', catchAllErrors(authenticate), Link.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createLink));
+        this.router.put('/', catchAllErrors(authenticate), Link.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateLink));
+        this.router.delete('/:site', catchAllErrors(authenticate), Link.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteLink));
     }
 
     initMiddleware() {

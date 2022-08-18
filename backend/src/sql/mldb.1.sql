@@ -13,3 +13,8 @@ CREATE TABLE RELEASE (
 INSERT INTO RELEASE(id, name, description, image, active, release_date) SELECT id, name, description, image, active, release_date FROM RELEASE_OLD;
 
 DROP TABLE RELEASE_OLD;
+
+CREATE TABLE USER (
+    username varchar(64) PRIMARY KEY,
+    hash varchar(512) NOT NULL
+);

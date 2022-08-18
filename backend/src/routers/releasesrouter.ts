@@ -4,6 +4,7 @@ import { IBaseRouter } from '../interfaces/interfaces';
 import { validate } from '../middleware/validationmiddleware';
 import Release from '../model/release';
 import { catchAllErrors } from '../util/util';
+import { authenticate } from '../middleware/authenticationmiddleware';
 
 class ReleasesRouter implements IBaseRouter {
 
@@ -20,9 +21,9 @@ class ReleasesRouter implements IBaseRouter {
         this.router.get('/', catchAllErrors(this.getAllReleases));
         this.router.get('/active', catchAllErrors(this.getActiveReleases));
         this.router.get('/:id', catchAllErrors(this.getRelease));
-        this.router.post('/', Release.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createRelease));
-        this.router.put('/', Release.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateRelease));
-        this.router.delete('/:id', Release.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteRelease));
+        this.router.post('/', catchAllErrors(authenticate), Release.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createRelease));
+        this.router.put('/', catchAllErrors(authenticate), Release.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateRelease));
+        this.router.delete('/:id', catchAllErrors(authenticate), Release.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteRelease));
     }
 
     initMiddleware() {

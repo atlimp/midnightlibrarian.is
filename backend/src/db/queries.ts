@@ -35,6 +35,9 @@ export const INSERT_MEMBER = 'INSERT INTO MEMBER(name, role, description, image)
 export const UPDATE_MEMBER = 'UPDATE MEMBER SET name = $name, role = $role, description = $description, image= $image WHERE id = $id';
 export const DELETE_MEMBER = 'DELETE FROM MEMBER WHERE id = $id';
 
+// USERS
+export const GET_HASH = 'SELECT hash FROM USER WHERE username = $username';
+
 // OTHER
 export const BEGIN_TRANSACTION = 'BEGIN TRANSACTION';
 export const COMMIT_TRANSACTION = 'COMMIT';

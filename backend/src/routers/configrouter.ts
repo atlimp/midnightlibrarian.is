@@ -4,6 +4,7 @@ import { IBaseRouter } from '../interfaces/interfaces';
 import { catchAllErrors } from '../util/util';
 import Config from '../model/config';
 import { validate } from '../middleware/validationmiddleware';
+import { authenticate } from '../middleware/authenticationmiddleware';
 
 class ConfigRouter implements IBaseRouter {
 
@@ -18,7 +19,7 @@ class ConfigRouter implements IBaseRouter {
 
     initRoutes() {
         this.router.get('/', catchAllErrors(this.getConfig));
-        this.router.put('/', Config.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateConfig));
+        this.router.put('/', catchAllErrors(authenticate), Config.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateConfig));
     }
 
     initMiddleware() {

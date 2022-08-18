@@ -4,6 +4,7 @@ import { IBaseRouter } from '../interfaces/interfaces';
 import { validate } from '../middleware/validationmiddleware';
 import Member from '../model/member';
 import { catchAllErrors } from '../util/util';
+import { authenticate } from '../middleware/authenticationmiddleware';
 
 class MemberRouter implements IBaseRouter {
 
@@ -19,9 +20,9 @@ class MemberRouter implements IBaseRouter {
     initRoutes() {
         this.router.get('/', catchAllErrors(this.getAllMembers));
         this.router.get('/:id', catchAllErrors(this.getMember));
-        this.router.post('/', Member.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createMember));
-        this.router.put('/', Member.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateMember));
-        this.router.delete('/:id', Member.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteMember));
+        this.router.post('/', catchAllErrors(authenticate), Member.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createMember));
+        this.router.put('/', catchAllErrors(authenticate), Member.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateMember));
+        this.router.delete('/:id', catchAllErrors(authenticate), Member.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteMember));
     }
 
     initMiddleware() {
