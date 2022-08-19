@@ -14,11 +14,6 @@ CREATE TABLE LINK (
     active boolean DEFAULT(TRUE)
 );
 
-CREATE TABLE RELEASETYPE (
-    id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
-    type varchar(64) DEFAULT('')
-);
-
 CREATE TABLE RELEASE (
     id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
     name varchar(256) DEFAULT(''),

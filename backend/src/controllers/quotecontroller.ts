@@ -1,5 +1,6 @@
 import { GET_RANDOM_QUOTE } from '../db/queries';
-import { IBaseController, Quote } from '../interfaces/interfaces';
+import { IBaseController } from '../interfaces/interfaces';
+import Quote from '../model/quote';
 import DatabaseService from '../services/databaseservice';
 
 class QuoteController implements IBaseController {
