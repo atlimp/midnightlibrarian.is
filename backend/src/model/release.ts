@@ -96,6 +96,7 @@ class Release {
         return validationChain;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     private static deleteValidation(method: string, propName = ''): ValidationChain[] {
         const validationChain: ValidationChain[] = [];
 

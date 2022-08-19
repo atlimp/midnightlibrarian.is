@@ -6,7 +6,7 @@ export function generateToken(username: string, expiresIn: number) {
 
     if (!secret) throw new Error('No token secret specified, unable to create token');
 
-    return jwt.sign({ username}, secret, { expiresIn });
+    return jwt.sign({ username }, secret, { expiresIn });
 }
 
 export function verifyToken(token: string): Promise<string> {

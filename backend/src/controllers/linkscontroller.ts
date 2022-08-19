@@ -1,4 +1,4 @@
-import { BEGIN_TRANSACTION, DELETE_LINK, GET_ALL_ACTIVE_LINKS, GET_ALL_LINKS, GET_INSERTED_LINK, GET_LINK, INSERT_LINK, UPDATE_LINK } from '../db/queries';
+import { DELETE_LINK, GET_ALL_ACTIVE_LINKS, GET_ALL_LINKS, GET_INSERTED_LINK, GET_LINK, INSERT_LINK, UPDATE_LINK } from '../db/queries';
 import NotFoundException from '../exceptions/notfoundexception';
 import { IBaseController } from '../interfaces/interfaces';
 import Link from '../model/link';
@@ -92,7 +92,7 @@ class LinksController implements IBaseController {
                 active: result.active === 1,
             } as Link;
         } catch (e) {
-            await db.rollbackTransaction()
+            await db.rollbackTransaction();
             throw e;
         } finally {
             db.close();
@@ -126,7 +126,7 @@ class LinksController implements IBaseController {
                 active: result.active === 1,
             } as Link;
         } catch (e) {
-            await db.rollbackTransaction()
+            await db.rollbackTransaction();
             throw e;
         } finally {
             db.close();
@@ -144,7 +144,7 @@ class LinksController implements IBaseController {
             
             db.commitTransaction();
         } catch (e) {
-            db.rollbackTransaction()
+            db.rollbackTransaction();
             throw e;
         } finally {
             db.close();

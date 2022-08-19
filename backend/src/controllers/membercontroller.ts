@@ -131,7 +131,7 @@ class MemberController implements IBaseController {
             
             await db.commitTransaction();
         } catch (e) {
-            await db.rollbackTransaction()
+            await db.rollbackTransaction();
             throw e;
         } finally {
             db.close();

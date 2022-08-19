@@ -103,7 +103,7 @@ class ReleaseController implements IBaseController {
                 $image: release.image,
                 $active: release.active,
                 $release_date: release.releaseDate,
-            }
+            };
 
             await db.run(INSERT_RELEASE, params);
 
@@ -151,7 +151,7 @@ class ReleaseController implements IBaseController {
                 $image: release.image,
                 $active: release.active,
                 $release_date: release.releaseDate,
-            }
+            };
 
             await db.run(UPDATE_RELEASE, params);
 
@@ -197,7 +197,7 @@ class ReleaseController implements IBaseController {
             await db.run(DELETE_RELEASE_LINKS, { $release: id });
             
             await db.commitTransaction();
-        } catch(e) {
+        } catch (e) {
             await db.rollbackTransaction();
             throw e;
         } finally {

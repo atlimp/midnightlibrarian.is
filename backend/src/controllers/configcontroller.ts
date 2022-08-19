@@ -42,7 +42,7 @@ class ConfigController implements IBaseController {
     
             const [ result ] = await db.get(GET_CONFIG, { $configId: 1 });
             
-            await db.commitTransaction()
+            await db.commitTransaction();
 
             return {
                 doi: {

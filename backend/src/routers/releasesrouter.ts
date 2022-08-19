@@ -80,7 +80,7 @@ class ReleasesRouter implements IBaseRouter {
 
         const controller = new ReleasesController();
 
-        const result = await controller.deleteRelease(Number(id));
+        await controller.deleteRelease(Number(id));
 
         return res.status(204).send();
     }

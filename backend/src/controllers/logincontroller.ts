@@ -27,7 +27,7 @@ class LinksController implements IBaseController {
 
                 return {
                     token,
-                    expiresAt
+                    expiresAt,
                 } as Token;
             }
         }
