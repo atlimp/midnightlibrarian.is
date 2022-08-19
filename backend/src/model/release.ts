@@ -53,7 +53,7 @@ class Release {
         validationChain.push(check(props.links).isArray().withMessage(`Data type for property ${props.image} is invalid, expected type array`));
         validationChain.push(check(props.image).isURL().withMessage(`Data type for property ${props.image} is invalid, expected type url`));
         validationChain.push(check(props.active).isBoolean().withMessage(`Data type for property ${props.active} is invalid, expected type boolean`));
-        validationChain.push(check(props.releaseDate).isDate().withMessage(`Data type for property ${props.releaseDate} is invalid, expected type date`));
+        validationChain.push(check(props.releaseDate).isISO8601().withMessage(`Data type for property ${props.releaseDate} is invalid, expected type datetime`));
         
         ReleaseLink.validation(method, 'links.*.').forEach(x => validationChain.push(x));
         
@@ -89,7 +89,7 @@ class Release {
         validationChain.push(check(props.links).isArray().withMessage(`Data type for property ${props.image} is invalid, expected type array`));
         validationChain.push(check(props.image).isURL().withMessage(`Data type for property ${props.image} is invalid, expected type url`));
         validationChain.push(check(props.active).isBoolean().withMessage(`Data type for property ${props.active} is invalid, expected type boolean`));
-        validationChain.push(check(props.releaseDate).isDate().withMessage(`Data type for property ${props.releaseDate} is invalid, expected type date`));
+        validationChain.push(check(props.releaseDate).isISO8601().withMessage(`Data type for property ${props.releaseDate} is invalid, expected type datetime`));
         
         ReleaseLink.validation(method, 'links.*.').forEach(x => validationChain.push(x));
         
