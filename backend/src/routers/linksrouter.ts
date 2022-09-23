@@ -81,7 +81,7 @@ class LinksRouter implements IBaseRouter {
 
         const controller = new LinksController();
 
-        const result = await controller.createLink({ id, site, link, svg, active } as Link);
+        const result = await controller.updateLink({ id, site, link, svg, active } as Link);
 
         return res.status(200).json(result);
     }
