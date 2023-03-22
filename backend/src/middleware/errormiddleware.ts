@@ -13,7 +13,7 @@ export default function errorMiddleware(error: Error, req: Request, res: Respons
         errors = error.messageArray;
     }
 
-    console.error(req.path, req.method, error);
+    console.error(req.method, req.path, error);
 
     res.status(status).json({ status, message, errors });
 }
