@@ -64,7 +64,6 @@ class Release {
         const validationChain: ValidationChain[] = [];
         
         const props = {
-            id: `${propName}id`,
             name: `${propName}name`,
             description: `${propName}description`,
             type: `${propName}type`,
@@ -74,8 +73,7 @@ class Release {
             releaseDate: `${propName}releaseDate`,
         };
         
-        validationChain.push(check(props.id).exists().withMessage(`Missing required property ${props.id}`));
-        validationChain.push(check(props.id).custom(async (value) => {
+        validationChain.push(param('id').custom(async (value) => {
             const controller: ReleaseController = new ReleaseController();
 
             const release = await controller.releaseExists(value);

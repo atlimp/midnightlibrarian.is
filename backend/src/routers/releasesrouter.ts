@@ -22,7 +22,7 @@ class ReleasesRouter implements IBaseRouter {
         this.router.get('/active', catchAllErrors(this.getActiveReleases));
         this.router.get('/:id', catchAllErrors(this.getRelease));
         this.router.post('/', catchAllErrors(authenticate), Release.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createRelease));
-        this.router.put('/', catchAllErrors(authenticate), Release.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateRelease));
+        this.router.put('/:id', catchAllErrors(authenticate), Release.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateRelease));
         this.router.delete('/:id', catchAllErrors(authenticate), Release.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteRelease));
     }
 
@@ -66,7 +66,10 @@ class ReleasesRouter implements IBaseRouter {
     }
 
     async updateRelease(req: Request, res: Response) {
+        const { id } = req.params;
         const release = req.body;
+
+        release.id = Number(id);
 
         const controller = new ReleasesController();
 

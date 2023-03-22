@@ -22,7 +22,7 @@ class LinksRouter implements IBaseRouter {
         this.router.get('/active', catchAllErrors(this.getActiveLinks));
         this.router.get('/:site', catchAllErrors(this.getLink));
         this.router.post('/', catchAllErrors(authenticate), Link.validation('POST'), catchAllErrors(validate), catchAllErrors(this.createLink));
-        this.router.put('/', catchAllErrors(authenticate), Link.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateLink));
+        this.router.put('/:site', catchAllErrors(authenticate), Link.validation('PUT'), catchAllErrors(validate), catchAllErrors(this.updateLink));
         this.router.delete('/:site', catchAllErrors(authenticate), Link.validation('DELETE'), catchAllErrors(validate), catchAllErrors(this.deleteLink));
     }
 
@@ -71,9 +71,8 @@ class LinksRouter implements IBaseRouter {
     }
 
     async updateLink(req: Request, res: Response) {
+        const { site } = req.params;
         const {
-            id,
-            site,
             link,
             svg,
             active,
@@ -81,7 +80,7 @@ class LinksRouter implements IBaseRouter {
 
         const controller = new LinksController();
 
-        const result = await controller.updateLink({ id, site, link, svg, active } as Link);
+        const result = await controller.updateLink({ site, link, svg, active } as Link);
 
         return res.status(200).json(result);
     }

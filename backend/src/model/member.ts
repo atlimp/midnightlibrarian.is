@@ -48,15 +48,13 @@ class Member {
         const validationChain: ValidationChain[] = [];
         
         const props = {
-            id: `${propName}id`,
             name: `${propName}name`,
             role: `${propName}role`,
             description: `${propName}description`,
             image: `${propName}image`,
         };
-        
-        validationChain.push(check(props.id).exists().withMessage(`Missing required property ${props.id}`));
-        validationChain.push(check(props.id).custom(async (value) => {
+
+        validationChain.push(param('id').custom(async (value) => {
             const controller = new MemberController();
 
             const member = await controller.memberExists(value);
