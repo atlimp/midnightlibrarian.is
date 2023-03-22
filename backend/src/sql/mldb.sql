@@ -18,11 +18,10 @@ CREATE TABLE RELEASE (
     id integer PRIMARY KEY AUTOINCREMENT NOT NULL,
     name varchar(256) DEFAULT(''),
     description varchar(512) DEFAULT(''),
-    type int DEFAULT(0),
+    type varchar(64) DEFAULT(''),
     image varchar(512) DEFAULT(''),
     active boolean DEFAULT(TRUE),
-    release_date varchar(30) DEFAULT(''),
-    FOREIGN KEY (type) REFERENCES RELEASETYPE(id)
+    release_date varchar(30) DEFAULT('')
 );
 
 CREATE TABLE RELEASELINK (
@@ -43,6 +42,11 @@ CREATE TABLE MEMBER (
     role varchar(32),
     description text,
     image varchar(512)
+);
+
+CREATE TABLE USER (
+    username varchar(64) PRIMARY KEY,
+    hash varchar(512) NOT NULL
 );
 
 INSERT INTO CONFIG(config_id, doi_date, doi_message, doi_countdown, motd, show_additional_content) VALUES (1, '', '', FALSE, '', FALSE);
