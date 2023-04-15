@@ -16,6 +16,7 @@ services:
       image: nginx:latest
       ports:
           - "1313:8080"
+      restart: always
       volumes:
           - ./backend/nginx/lb.dev.conf:/etc/nginx/conf.d/lb.conf
       depends_on:
