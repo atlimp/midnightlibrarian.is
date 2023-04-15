@@ -9,7 +9,8 @@
       "rootDir": "src",                         /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
   
       /* Strict Type-Checking Options */
-      "moduleResolution": "node"                /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */      
+      "moduleResolution": "node",                /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+      "strictPropertyInitialization": false
     },
     "include": [
       "src/"
