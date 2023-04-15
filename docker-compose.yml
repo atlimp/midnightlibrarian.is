@@ -11,6 +11,7 @@ services:
       - ./backend/src:/home/node/app/src
       - ./backend/assets:/home/node/app/assets
       - ./backend/nodemon.json:/home/node/app/nodemon.json
+      - ./static_site/static:/home/node/app/uploads
     command: npm run dev
   nginx:
       image: nginx:latest
