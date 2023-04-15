@@ -10,3 +10,4 @@ secrets/*
 .env.*
 !.env.example
 /build
+static_site/static
