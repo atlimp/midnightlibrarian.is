@@ -5,6 +5,7 @@ import QuoteRouter from './routers/quoterouter';
 import ReleasesRouter from './routers/releasesrouter';
 import MemberRouter from './routers/memberrouter';
 import LoginRouter from './routers/loginrouter';
+import UploadRouter from './routers/uploadrouter';
 import { getConfigOrDefault } from './util/util';
 
 const host: string = getConfigOrDefault('HOST', 'localhost');
@@ -21,6 +22,7 @@ const app = new App({
         new QuoteRouter(),
         new MemberRouter(),
         new LoginRouter(),
+        new UploadRouter(),
     ],
 });
 
